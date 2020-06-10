@@ -813,6 +813,7 @@ function ObjectFindNext(var F: TSuperObjectIter): boolean;
 procedure ObjectFindClose(var F: TSuperObjectIter);
 
 function SO(const s: SOString = '{}'): ISuperObject; overload;
+function SO(const o: ISuperObject): ISuperObject; overload; //Gitek, slippe å få variant type 13 feil. Kloner objektet.
 function SO(const value: Variant): ISuperObject; overload;
 function SO(const Args: array of const): ISuperObject; overload;
 
@@ -1016,6 +1017,11 @@ end;
 function SO(const s: SOString): ISuperObject; overload;
 begin
   Result := TSuperObject.ParseString(PSOChar(s), False);
+end;
+
+function SO(const o: ISuperObject): ISuperObject; overload; //Gitek
+begin
+  result:=so(o.AsJSon); //o.clone fungerer ikke
 end;
 
 function SA(const Args: array of const): ISuperObject; overload;
