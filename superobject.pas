@@ -1092,7 +1092,8 @@ function SO(const value: Variant): ISuperObject; overload;
 begin
   with TVarData(value) do
   case VType of
-    varNull:     Result := nil;
+    //varNull:     Result := nil;
+    varNull: Result:= TSuperObject.Create(stNull);
     varEmpty:    Result := nil;
     varSmallInt: Result := TSuperObject.Create(VSmallInt);
     varInteger:  Result := TSuperObject.Create(VInteger);
